@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>org.leolabs.icloud-passwords</string>
+	<key>connections</key>
+	<dict>
+		<key>09B31289-B4CD-4EA1-BC39-E3B92AC03A25</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4F9253C0-880A-4FB8-9201-F3C3C8739218</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2C99F6F1-EF16-4CF1-9762-5D05A1FFAA4D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>76C22FFA-67AE-4EB3-8261-B49850DC6931</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1C67A595-D8CB-4801-997B-4227B749A8B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Léo Bernard</string>
+	<key>description</key>
+	<string>Quickly copy passwords and verification codes from iCloud</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>iCloud Passwords</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"
+tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true	end tellend tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string>copy-first-password.scpt</string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1C67A595-D8CB-4801-997B-4227B749A8B8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>p</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Find passwords</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>76C22FFA-67AE-4EB3-8261-B49850DC6931</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>fp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Copy password of first result</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2C99F6F1-EF16-4CF1-9762-5D05A1FFAA4D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true				# Copy the password		set passwordField to first button of scroll area 1 of group 1 whose description is "Password"		perform action "AXShowMenu" of passwordField		click menu item 1 of menu 1 of passwordField		
+		# Show a success notification		set domainName to value of static text 1 of UI element 1 of firstResult		set accountName to value of static text 2 of UI element 1 of firstResult				display notification accountName with title "Password copied" subtitle domainName	end tell		tell application "System Preferences" to quitend tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string>copy-first-password.scpt</string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true
+
+		# Get selected domain and account names		set domainName to value of static text 1 of UI element 1 of firstResult		set accountName to value of static text 2 of UI element 1 of firstResult				set foundOtp to false				# Look for a verification code		repeat with verificationCode in every button of scroll area 1 of group 1			set titleMatch to do shell script "sed 's/[^0-9]//g' &lt;&lt;&lt;" &amp; quoted form of (title of verificationCode as string)						# Code should be at least 6 characters long			if (count titleMatch as string) ≥ 6 then				perform action "AXShowMenu" of verificationCode				click menu item 1 of menu 1 of verificationCode								display notification accountName with title "Copied verification code" subtitle domainName				set foundOtp to true			end if		end repeat				if not foundOtp then			display notification "Account " &amp; accountName &amp; " has no OTP"		end if	end tell		tell application "System Preferences" to quitend tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string>copy-first-password.scpt</string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F9253C0-880A-4FB8-9201-F3C3C8739218</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>otp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Copy OTP of the first result</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>09B31289-B4CD-4EA1-BC39-E3B92AC03A25</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>This workflow allows you to easily copy the password or verification code of the first match.
+
+The following keywords are available:
+
+- f &lt;query&gt;
+  Open Preferences and search for the query
+- fp &lt;query&gt;
+  Open Preferences, copy the first result's password, and quit
+- otp &lt;query&gt;
+  Open Preferences, copy the first result's OTP, and quit</string>
+	<key>uidata</key>
+	<dict>
+		<key>09B31289-B4CD-4EA1-BC39-E3B92AC03A25</key>
+		<dict>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
+		<dict>
+			<key>xpos</key>
+			<integer>265</integer>
+			<key>ypos</key>
+			<integer>145</integer>
+		</dict>
+		<key>1C67A595-D8CB-4801-997B-4227B749A8B8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>265</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+		<key>2C99F6F1-EF16-4CF1-9762-5D05A1FFAA4D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>145</integer>
+		</dict>
+		<key>4F9253C0-880A-4FB8-9201-F3C3C8739218</key>
+		<dict>
+			<key>xpos</key>
+			<integer>265</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>76C22FFA-67AE-4EB3-8261-B49850DC6931</key>
+		<dict>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string></string>
+	<key>webaddress</key>
+	<string>leolabs.org</string>
+</dict>
+</plist>
