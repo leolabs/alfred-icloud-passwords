@@ -10,7 +10,33 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4F9253C0-880A-4FB8-9201-F3C3C8739218</string>
+				<string>8BE8F4F1-A4F0-4C7B-A188-FE709493DE04</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FE3D49F-5586-462F-8809-21B34D46ED4A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1C67A595-D8CB-4801-997B-4227B749A8B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FE3D49F-5586-462F-8809-21B34D46ED4A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -45,6 +71,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8BE8F4F1-A4F0-4C7B-A188-FE709493DE04</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FE3D49F-5586-462F-8809-21B34D46ED4A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Léo Bernard</string>
@@ -56,30 +95,6 @@
 	<string>iCloud Passwords</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"
-tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true	end tellend tell</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string>copy-first-password.scpt</string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1C67A595-D8CB-4801-997B-4227B749A8B8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -100,6 +115,30 @@
 			<string>76C22FFA-67AE-4EB3-8261-B49850DC6931</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"
+tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true	end tellend tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>find-password.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1C67A595-D8CB-4801-997B-4227B749A8B8</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -133,11 +172,11 @@
 				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true				# Copy the password		set passwordField to first button of scroll area 1 of group 1 whose description is "Password"		perform action "AXShowMenu" of passwordField		click menu item 1 of menu 1 of passwordField		
 		# Show a success notification		set domainName to value of static text 1 of UI element 1 of firstResult		set accountName to value of static text 2 of UI element 1 of firstResult				display notification accountName with title "Password copied" subtitle domainName	end tell		tell application "System Preferences" to quitend tell</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>copy-first-password.scpt</string>
+				<string>copy-password.applescript</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -149,27 +188,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>argument</key>
+				<string>'{query}', {allvars}</string>
+				<key>cleardebuggertext</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># Open passwords windowdo shell script "open /Library/Apple/System/Library/CoreServices/SafariSupport.bundle/Contents/PreferencePanes/Passwords.prefPane"set searchQuery to "{query}"tell application "System Events"	tell window "Passwords" of process "System Preferences"		# Wait for search field to be available		repeat until ((first text field whose subrole is "AXSearchField") exists)			delay 0.1		end repeat				# Enter the search query		set value of first text field whose subrole is "AXSearchField" to searchQuery				set results to outline 1 of scroll area 1				if not (row 2 of results exists) then			display notification "No entry found for " &amp; searchQuery &amp; "."			tell me to quit		end if				# First result is the second row, first row is the search field		set firstResult to row 2 of results				# Select the first result		set selected of firstResult to true
-
-		# Get selected domain and account names		set domainName to value of static text 1 of UI element 1 of firstResult		set accountName to value of static text 2 of UI element 1 of firstResult				set foundOtp to false				# Look for a verification code		repeat with verificationCode in every button of scroll area 1 of group 1			set titleMatch to do shell script "sed 's/[^0-9]//g' &lt;&lt;&lt;" &amp; quoted form of (title of verificationCode as string)						# Code should be at least 6 characters long			if (count titleMatch as string) ≥ 6 then				perform action "AXShowMenu" of verificationCode				click menu item 1 of menu 1 of verificationCode								display notification accountName with title "Copied verification code" subtitle domainName				set foundOtp to true			end if		end repeat				if not foundOtp then			display notification "Account " &amp; accountName &amp; " has no OTP"		end if	end tell		tell application "System Preferences" to quitend tell</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string>copy-first-password.scpt</string>
-				<key>type</key>
-				<integer>6</integer>
+				<key>processoutputs</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.debug</string>
 			<key>uid</key>
-			<string>4F9253C0-880A-4FB8-9201-F3C3C8739218</string>
+			<string>0FE3D49F-5586-462F-8809-21B34D46ED4A</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -192,6 +223,29 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>copy-otp.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8BE8F4F1-A4F0-4C7B-A188-FE709493DE04</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>This workflow allows you to easily copy the password or verification code of the first match.
@@ -212,6 +266,13 @@ The following keywords are available:
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>280</integer>
+		</dict>
+		<key>0FE3D49F-5586-462F-8809-21B34D46ED4A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>485</integer>
+			<key>ypos</key>
+			<integer>175</integer>
 		</dict>
 		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
 		<dict>
@@ -234,19 +295,19 @@ The following keywords are available:
 			<key>ypos</key>
 			<integer>145</integer>
 		</dict>
-		<key>4F9253C0-880A-4FB8-9201-F3C3C8739218</key>
-		<dict>
-			<key>xpos</key>
-			<integer>265</integer>
-			<key>ypos</key>
-			<integer>280</integer>
-		</dict>
 		<key>76C22FFA-67AE-4EB3-8261-B49850DC6931</key>
 		<dict>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>10</integer>
+		</dict>
+		<key>8BE8F4F1-A4F0-4C7B-A188-FE709493DE04</key>
+		<dict>
+			<key>xpos</key>
+			<integer>265</integer>
+			<key>ypos</key>
+			<integer>280</integer>
 		</dict>
 	</dict>
 	<key>variablesdontexport</key>
