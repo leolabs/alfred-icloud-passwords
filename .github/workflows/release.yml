@@ -3,7 +3,7 @@ name: Release the Workflow
 # Controls when the workflow will run
 on:
   release:  
-    type: [created]
+    types: [created]
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
