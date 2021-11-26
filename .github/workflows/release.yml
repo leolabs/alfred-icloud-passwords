@@ -2,8 +2,9 @@ name: Release the Workflow
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  release:
+  release:  
+    type: [created]
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,9 +23,9 @@ jobs:
         run: sed -i.bak 's/\[version\]/'"$TRAVIS_BRANCH-$TRAVIS_COMMIT"'/g' info.plist
         
       - name: Package the scripts
-        run: zip -rv "iCloud Passwords.alfredworkflow" *
+        run: zip -rv "iCloud-Passwords.alfredworkflow" *
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: "iCloud Passwords.alfredworkflow"
+          files: "iCloud-Passwords.alfredworkflow"
