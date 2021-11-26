@@ -2,7 +2,7 @@
 
 This workflow allows you to quickly find and copy iCloud passwords and OTPs to your clipboard.
 
-![demo](https://user-images.githubusercontent.com/541628/143510113-cadaae5e-2eb6-4a84-8a72-7927cb39e23f.gif)
+![demo](https://user-images.githubusercontent.com/541628/143510388-843a5fa1-118c-4367-aea8-75c2d9c417e3.gif)
 
 It offers three keywords:
 
