@@ -10,5 +10,7 @@ It offers three keywords:
 - `fp <query>` – Open Preferences, copy the first result's password, and quit
 - `otp <query>` – Open Preferences, copy the first result's OTP, and quit
 
+After a password or OTP has been copied, you'll get a notification about it.
+
 The workflow makes use of AppleScript's accessibility controls, so you might have to give it 
 permission to access them the first time you use it.
