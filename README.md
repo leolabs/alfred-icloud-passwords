@@ -8,7 +8,7 @@ This workflow allows you to quickly find and copy iCloud passwords and OTPs to y
 
 It offers three keywords:
 
-- `f <query>` – Open Preferences and search for the query
+- `p <query>` – Open Preferences and search for the query
 - `fp <query>` – Open Preferences, copy the first result's password, and quit
 - `otp <query>` – Open Preferences, copy the first result's OTP, and quit
 
